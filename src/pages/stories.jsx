@@ -4,20 +4,6 @@ import Story from "../components/story/story";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-// const stories = [
-//     {
-//         author: 'Rakibul',
-//         title: 'Cow and crow',
-//         story: 'Once upon a time, there was a cow who loved a crow........',
-//         postedAt: '20/09/2020'
-//     },
-//     {
-//         author: 'Ranak',
-//         title: 'Dog and cat',
-//         story: 'Once upon a time, there was a dog who loved a cat........',
-//         postedAt: '20/09/2020'
-//     }
-// ]
 
 const Stories = (props) => {
 
