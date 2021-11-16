@@ -12,10 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import axios from "axios";
+import { Redirect, useHistory } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 
 const SignUp = (props) => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
+  const { loggedIn, login } = useContext(AuthContext);
   const [username, setUsername] = useState();
   const [name, setName] = useState();
   const [password, setPassword] = useState();
@@ -27,7 +30,7 @@ const SignUp = (props) => {
     setRequestState("loading");
 
     axios
-      .post("http://192.168.1.128:8000/api/v1/users", { email, username, name, password, confirmPassword })
+      .post("http://localhost:8000/api/v1/users", { email, username, name, password, confirmPassword })
       .then((res) => {
         setRequestState("loaded");
         toast({
@@ -37,92 +40,95 @@ const SignUp = (props) => {
           isClosable: true,
         });
 
+
       })
       .catch((err) => {
         setRequestState("error");
       });
   };
 
-  return (
-    <Layout>
-      <Center h={["75vh", "85vh"]}>
-        <Box
-          boxShadow="xl"
-          textAlign="center"
-          bg="white"
-          borderRadius={5}
-          p={4}
-        >
-          <Heading size="md" m={1}>
-            Create Your Account
-          </Heading>
-          <form onSubmit={signUp}>
-            <Input
-              placeholder="Email"
-              type="email"
-              m={1}
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoFocus
-            />
-            <InputGroup m={1}>
+  if (loggedIn) return <Redirect to="/" />;
+  else
+    return (
+      <Layout>
+        <Center h={["75vh", "85vh"]}>
+          <Box
+            boxShadow="xl"
+            textAlign="center"
+            bg="white"
+            borderRadius={5}
+            p={4}
+          >
+            <Heading size="md" m={1}>
+              Create Your Account
+            </Heading>
+            <form onSubmit={signUp}>
               <Input
-                type="text"
-                placeholder="Name"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
+                placeholder="Email"
+                type="email"
+                m={1}
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
                 required
+                autoFocus
               />
-            </InputGroup>
-            <InputGroup m={1}>
-              <Input
-                type="text"
-                placeholder="Username"
-                name="username"
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </InputGroup>
-            <InputGroup m={1}>
-              <Input
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </InputGroup>
-            <InputGroup m={1}>
-              <Input
-                type="password"
-                placeholder="Confirm Password"
-                name="confirmpassword"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-            </InputGroup>
+              <InputGroup m={1}>
+                <Input
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </InputGroup>
+              <InputGroup m={1}>
+                <Input
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </InputGroup>
+              <InputGroup m={1}>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </InputGroup>
+              <InputGroup m={1}>
+                <Input
+                  type="password"
+                  placeholder="Confirm Password"
+                  name="confirmpassword"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </InputGroup>
 
-            {requestState === "error" && (
-              <Text display="block" fontSize="sm" color="tomato">
-                Email or Username Already Exists!
-              </Text>
-            )}
-            <Button
-              colorScheme="teal"
-              size="sm"
-              m={1}
-              mb={4}
-              disabled={requestState === "loading" ? 1 : 0}
-              type="submit"
-            >
-              {requestState === "loading" && <Spinner mr={3} />}Sign Up
-            </Button>
-          </form>
-        </Box>
-      </Center>
-    </Layout>
-  );
+              {requestState === "error" && (
+                <Text display="block" fontSize="sm" color="tomato">
+                  Email or Username Already Exists!
+                </Text>
+              )}
+              <Button
+                colorScheme="teal"
+                size="sm"
+                m={1}
+                mb={4}
+                disabled={requestState === "loading" ? 1 : 0}
+                type="submit"
+              >
+                {requestState === "loading" && <Spinner mr={3} />}Sign Up
+              </Button>
+            </form>
+          </Box>
+        </Center>
+      </Layout>
+    );
 };
 
 export default SignUp;
