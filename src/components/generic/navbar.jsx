@@ -37,7 +37,7 @@ const MyNavbar = (props) => {
 
       {user &&
         (
-          <Button colorScheme="white" ml="auto" mr="5">
+          <Button boxShadow="none !important" colorScheme="white" ml="auto" mr="5">
             {
               user.username
             }
