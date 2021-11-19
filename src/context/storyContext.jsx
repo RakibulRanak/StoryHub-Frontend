@@ -1,12 +1,13 @@
 
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+import axios from "axios";;
 const { createContext, useState } = require("react");
 const StoryContext = createContext();
 
 const StoryProvider = (props) => {
     const [stories, setStories] = useState([])
     const [storiesLoading, setStoriesLoading] = useState(true);
+    const [singleStory, setSingleStory] = useState([]);
+    const [storyLoading, setStoryLoading] = useState(true);
 
 
     const getStories = () => {
@@ -17,6 +18,16 @@ const StoryProvider = (props) => {
                 setStoriesLoading(false)
             })
             .catch((err) => console.log(err));
+    };
+    const getSingleStory = (id) => {
+        axios
+            .get(`/api/v1/stories/${id}`)
+            .then((res) => {
+                setSingleStory(res.data.data)
+                setStoryLoading(false)
+            })
+            .catch((err) => console.log(err));
+
     };
 
     const postStories = (story) => {
@@ -50,7 +61,7 @@ const StoryProvider = (props) => {
     };
     return (
         <StoryContext.Provider
-            value={{ getStories, stories, storiesLoading, postStories, updateStory, deleteStory }}
+            value={{ getStories, stories, storiesLoading, postStories, updateStory, deleteStory, singleStory, getSingleStory, storyLoading }}
         >
             {props.children}
         </StoryContext.Provider>

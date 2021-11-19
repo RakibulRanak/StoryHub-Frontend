@@ -1,10 +1,10 @@
-import { Box, Button, Flex, Heading, Link, Spacer } from "@chakra-ui/react";
+import { Button, Flex, Heading, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
-import { useContext, useState } from "react";
-import { ModalHover } from 'react-modal-hover'
+import { useContext } from "react";
+
 const MyNavbar = (props) => {
-  const { loggedIn, login, logoutHandler, user } = useContext(AuthContext);
+  const { loggedIn, logoutHandler, user } = useContext(AuthContext);
   const MenuItems = (props) => (
     <Link
       as={RouterLink}

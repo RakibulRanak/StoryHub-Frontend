@@ -1,17 +1,19 @@
 import { Center, Box, Heading, Flex, Button, Text, Avatar, Stack, Icon } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 import { useContext, useState } from "react";
-import { AuthContext } from './../../context/authContext'
+import { AuthContext } from '../../context/authContext'
 import StoryModal from "./storyModal";
 import ShowMoreText from "react-show-more-text";
 import Moment from 'react-moment';
 import 'moment-timezone';
 import { StoryContext } from "../../context/storyContext";
+import Alert from "../generic/alert";
 
 
-const Story = (story) => {
+const StoryList = (story) => {
     const { user } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
     const { deleteStory } = useContext(StoryContext);
 
     return (
@@ -38,12 +40,20 @@ const Story = (story) => {
                                                 <Icon as={EditIcon} />
                                             </Button>
                                             {showModal &&
-                                                <StoryModal show={showModal} close={() => setShowModal(false)} storyId={story.id}
+                                                <StoryModal show={showModal} close={() => {
+
+                                                    setShowModal(false)
+                                                }} storyId={story.id}
                                                     title={story.title} story={story.story} />
                                             }
-                                            <Button onClick={() => deleteStory(story.id)} p="0" boxShadow="none !important">
+                                            <Button p="0" boxShadow="none !important" onClick={() => setShowAlert(true)}>
                                                 <Icon as={DeleteIcon} />
                                             </Button>
+                                            {showAlert &&
+                                                <Alert show={showAlert} close={() => {
+                                                    setShowAlert(false)
+                                                }} confirm={() => deleteStory(story.id)} />
+                                            }
                                         </Flex>
                                     )
                                 }
@@ -66,4 +76,4 @@ const Story = (story) => {
 
 };
 
-export default Story;
+export default StoryList;

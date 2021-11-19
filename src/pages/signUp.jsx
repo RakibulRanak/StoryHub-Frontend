@@ -16,6 +16,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 
 const SignUp = (props) => {
+  const history = useHistory();
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
   const { loggedIn, login } = useContext(AuthContext);
@@ -39,7 +40,7 @@ const SignUp = (props) => {
           duration: 3000,
           isClosable: true,
         });
-
+        history.push("/signin");
 
       })
       .catch((err) => {

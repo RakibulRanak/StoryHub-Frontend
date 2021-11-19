@@ -1,17 +1,15 @@
 import Layout from "../generic/layout";
-import { Center, Box, Heading, Textarea, Text, Button, Container, Spinner, FormControl, Input, FormLabel, Flex } from "@chakra-ui/react";
-import Story from "./story";
+import { Center, Box, Heading, Text, Container, Spinner, Flex } from "@chakra-ui/react";
+import StoryList from "./storyList";
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { AuthContext } from "../../context/authContext"
 import { StoryContext } from "../../context/storyContext";
-import ResizeTextarea from "react-textarea-autosize";
 import StoryModal from "./storyModal";
 
 import Pagination from "../pagination/pagination";
 
-const Stories = (props) => {
-    const { loggedIn, login } = useContext(AuthContext);
+const AllStory = (props) => {
+    const { loggedIn } = useContext(AuthContext);
     const { getStories, stories, storiesLoading } = useContext(StoryContext)
     const [storiesPerPage] = useState(6);
     const [currentPage, setCurrentPage] = useState(1);
@@ -45,7 +43,7 @@ const Stories = (props) => {
                         <Text align="center" mb="8px"><Heading margin="3">Stories</Heading></Text>
                         <Box bg="white" p={2} mt="10" pt="5" borderRadius="md" shadow="xl">
                             {currentStories.map((story) => (
-                                <Story{...story} key={story.id} />
+                                <StoryList{...story} key={story.id} />
                             ))}
                         </Box>
                     </Flex>
@@ -61,4 +59,4 @@ const Stories = (props) => {
 
 };
 
-export default Stories;
+export default AllStory;

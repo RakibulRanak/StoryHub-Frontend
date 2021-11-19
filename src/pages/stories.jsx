@@ -1,16 +1,17 @@
+
 import { Link } from "react-router-dom";
-import StoryView from "../components/story/storyView";
+import AllStory from "../components/story/allStory";
 import Layout from "../components/generic/layout";
 import { StoryProvider } from "../context/storyContext";
 
-const Story = () => {
+const Stories = () => {
     return (
         <StoryProvider>
             <Layout>
-                <StoryView />
+                <AllStory />
             </Layout>
         </StoryProvider>
     );
 };
 
-export default Story;
+export default Stories;

@@ -1,8 +1,9 @@
-import { Center, Box, Heading, Flex, Button, Input } from "@chakra-ui/react";
+import { Flex, Button, Input } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import ResizeTextarea from "react-textarea-autosize";
 import { StoryContext } from "../../context/storyContext";
 import { Modal } from "react-bootstrap";
+
 
 const StoryModal = (props) => {
     const { postStories, updateStory } = useContext(StoryContext)
@@ -10,13 +11,16 @@ const StoryModal = (props) => {
     const [story, setStory] = useState(props.story)
 
     const handlePostSubmit = (e) => {
-        props.close()
+        //this.setState({ value: "" })
         e.preventDefault();
+        props.close()
+        setTitle("");
+        setStory("");
         postStories({ title, story })
     }
     const handleUpdateSubmit = (e) => {
-        props.close()
         e.preventDefault();
+        props.close()
         updateStory({ title, story }, props.storyId)
     }
     return (
