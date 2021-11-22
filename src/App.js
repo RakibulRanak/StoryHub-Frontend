@@ -8,6 +8,8 @@ import Stories from "./pages/stories"
 import Story from "./pages/story"
 import SignUp from "./pages/signUp"
 import SignIn from "./pages/signIn";
+import NotFound from "./pages/404";
+
 
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/" component={Stories} />
+        <Route path="*" component={NotFound} />
       </Switch>
       {/* <Footer /> */}
     </Router>

@@ -1,10 +1,13 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from './authContext';
 const { createContext, useState } = require("react");
 const StoryContext = createContext();
 
 
 const StoryProvider = (props) => {
+    const { unAuthorizeHandler } = useContext(AuthContext);
     const history = useHistory();
     const [stories, setStories] = useState([])
     const [storiesLoading, setStoriesLoading] = useState(true);
@@ -28,17 +31,22 @@ const StoryProvider = (props) => {
                 setSingleStory(res.data.data)
                 setStoryLoading(false)
             })
-            .catch((err) => { console.log(err) });
+            .catch((err) => {
+                setSingleStory(false)
+                setStoryLoading(false)
+                console.log(err)
+            });
     };
 
     const postStories = (story) => {
-        console.log(story)
         axios
             .post("/api/v1/stories", story)
             .then((res) => {
                 getStories()
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                unAuthorizeHandler(err.response.status);
+            });
 
     };
 
@@ -49,7 +57,9 @@ const StoryProvider = (props) => {
                 getStories()
                 setSingleStory(res.data.data)
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                unAuthorizeHandler(err.response.status);
+            });
 
     };
     const deleteStory = (id) => {
@@ -60,7 +70,9 @@ const StoryProvider = (props) => {
                 history.push('/')
 
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                unAuthorizeHandler(err.response.status);
+            });
 
     };
     return (

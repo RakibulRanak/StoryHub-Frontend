@@ -1,6 +1,6 @@
 import Layout from "../components/generic/layout";
 import { AuthContext } from "../context/authContext";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import {
     Box,
     Button,
@@ -11,7 +11,8 @@ import {
     Text,
     Spinner,
     useToast,
-    Link
+    Link,
+    InputRightElement
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import axios from "axios";
@@ -21,8 +22,10 @@ const SignIn = (props) => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [requestState, setRequestState] = useState("not-requested");
+    const [message, setMessage] = useState(null)
     const toast = useToast();
     const { loggedIn, login } = useContext(AuthContext);
+    const handleClick = () => setShow(!show)
     const signIn = (e) => {
         e.preventDefault();
         setRequestState("loading");
@@ -43,6 +46,8 @@ const SignIn = (props) => {
             })
             .catch((err) => {
                 setRequestState("error");
+                // console.log(err.response.data.message)
+                setMessage(err.response.data.message)
             });
     };
 
@@ -73,19 +78,23 @@ const SignIn = (props) => {
                             </InputGroup>
                             <InputGroup m={1}>
                                 <Input
-                                    type="password"
+                                    type={show ? "text" : "password"}
                                     placeholder="Password"
                                     name="password"
+                                    show={show}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                 />
+                                <InputRightElement width="4.5rem">
+                                    <Button boxShadow="none !important" h="1.75rem" size="sm" onClick={handleClick}>
+                                        {show ? "Hide" : "Show"}
+                                    </Button>
+                                </InputRightElement>
                             </InputGroup>
 
-                            {requestState === "error" && (
-                                <Text display="block" fontSize="sm" color="tomato">
-                                    Wrong Credentials!
-                                </Text>
-                            )}
+                            <Text display="block" fontSize="sm" color="tomato">
+                                {message}
+                            </Text>
                             <Button
                                 colorScheme="teal"
                                 size="sm"

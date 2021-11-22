@@ -8,6 +8,8 @@ import 'moment-timezone';
 import { StoryContext } from "../../context/storyContext";
 import Alert from "../generic/alert";
 import { useParams } from "react-router-dom";
+import NotFound from "../../pages/404";
+import { Redirect } from "react-router-dom";
 
 const StoryView = () => {
 
@@ -25,8 +27,8 @@ const StoryView = () => {
         <Center w="100%" h="75vh">
             <Spinner />
         </Center>
-    ) :
-        (< Center  >
+    ) : !singleStory ? (<Redirect to="/404" />) :
+        (< Center >
             <Box m="10%" bg="white" p="200" minH="15vh" minW="85vh" p={3} >
 
                 <Flex border="1px" w="100%" bg="gray.100" padding="25px" direction="column" borderRadius="md">

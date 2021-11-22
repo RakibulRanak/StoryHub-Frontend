@@ -8,7 +8,8 @@ import {
   Heading,
   Text,
   Spinner,
-  useToast
+  useToast,
+  InputRightElement
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import axios from "axios";
@@ -25,7 +26,11 @@ const SignUp = (props) => {
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [requestState, setRequestState] = useState("not-requested");
+  const [message, setMessage] = useState(null)
+
   const toast = useToast();
+
+  const handleClick = () => setShow(!show)
   const signUp = (e) => {
     e.preventDefault();
     setRequestState("loading");
@@ -45,6 +50,7 @@ const SignUp = (props) => {
       })
       .catch((err) => {
         setRequestState("error");
+        setMessage(err.response.data.message)
       });
   };
 
@@ -93,16 +99,21 @@ const SignUp = (props) => {
               </InputGroup>
               <InputGroup m={1}>
                 <Input
-                  type="password"
+                  type={show ? "text" : "password"}
                   placeholder="Password"
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                <InputRightElement width="4.5rem">
+                  <Button boxShadow="none !important" h="1.75rem" size="sm" onClick={handleClick}>
+                    {show ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
               </InputGroup>
               <InputGroup m={1}>
                 <Input
-                  type="password"
+                  type={show ? "text" : "password"}
                   placeholder="Confirm Password"
                   name="confirmpassword"
                   onChange={(e) => setConfirmPassword(e.target.value)}

@@ -1,10 +1,12 @@
 
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 const { createContext, useState } = require("react");
 const AuthContext = createContext();
 
 const AuthProvider = (props) => {
+    const toast = useToast();
     const [loggedIn, setLoggedIn] = useState(
         JSON.parse(localStorage.getItem("loggedIn")) || false
     );
@@ -28,10 +30,24 @@ const AuthProvider = (props) => {
 
     const logoutHandler = (e) => {
         logout();
-        axios.get("/api/v1/users/logout").finally(() => {
+        axios.post("/api/v1/users/logout").finally(() => {
             return <Redirect to="/" />;
         });
+
     };
+    const unAuthorizeHandler = (errCode) => {
+        if (errCode === 401) {
+            logoutHandler()
+            toast({
+                title: "Your session is expired. Please login to continue!",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+            //return <Redirect to="/signin" />;
+        }
+
+    }
 
 
 
@@ -41,6 +57,7 @@ const AuthProvider = (props) => {
                 loggedIn,
                 login,
                 logoutHandler,
+                unAuthorizeHandler,
                 user
             }}
         >
