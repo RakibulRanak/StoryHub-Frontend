@@ -15,7 +15,7 @@ function App() {
     <Router>
       <MyNavbar />
       <Switch>
-        <Route exact path="/story/:id" component={Story} />
+        <Route exact path="/stories/:id" component={Story} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/" component={Stories} />

@@ -11,7 +11,6 @@ const StoryModal = (props) => {
     const [story, setStory] = useState(props.story)
 
     const handlePostSubmit = (e) => {
-        //this.setState({ value: "" })
         e.preventDefault();
         props.close()
         setTitle("");

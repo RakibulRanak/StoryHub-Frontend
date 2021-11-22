@@ -1,9 +1,11 @@
-
-import axios from "axios";;
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 const { createContext, useState } = require("react");
 const StoryContext = createContext();
 
+
 const StoryProvider = (props) => {
+    const history = useHistory();
     const [stories, setStories] = useState([])
     const [storiesLoading, setStoriesLoading] = useState(true);
     const [singleStory, setSingleStory] = useState([]);
@@ -26,8 +28,7 @@ const StoryProvider = (props) => {
                 setSingleStory(res.data.data)
                 setStoryLoading(false)
             })
-            .catch((err) => console.log(err));
-
+            .catch((err) => { console.log(err) });
     };
 
     const postStories = (story) => {
@@ -46,6 +47,7 @@ const StoryProvider = (props) => {
             .put(`/api/v1/stories/${id}`, story)
             .then((res) => {
                 getStories()
+                setSingleStory(res.data.data)
             })
             .catch((err) => console.log(err));
 
@@ -55,6 +57,8 @@ const StoryProvider = (props) => {
             .delete(`/api/v1/stories/${id}`)
             .then((res) => {
                 getStories()
+                history.push('/')
+
             })
             .catch((err) => console.log(err));
 

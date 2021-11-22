@@ -30,7 +30,8 @@ const StoryList = (story) => {
                         </Stack>
                         <Flex direction="row">
                             <Heading color="blue.600">
-                                {story.title}
+                                <a href={`/stories/${story.id}`}> {story.title}</a>
+
                             </Heading>
                             <Box pl="10">
                                 {
@@ -68,10 +69,10 @@ const StoryList = (story) => {
                             </Text>
                         </ShowMoreText>
                     </Box>
-                </Flex>
-            </Center>
+                </Flex >
+            </Center >
 
-        </Box>
+        </Box >
     );
 
 };
