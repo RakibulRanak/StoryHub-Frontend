@@ -1,6 +1,27 @@
 import { Center, Box, Heading, Flex } from "@chakra-ui/react";
 const Story = (story) => {
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     setRequestState("loading");
+    //     axios
+    //         .patch(`/api/blogs/${blog.id}`, editedBlog)
+    //         .then((res) => {
+    //             setRequestState("success");
+    //             onClose();
+    //         })
+    //         .catch((err) => {
+    //             unauthorizedHandler(err);
+    //             onClose();
+    //             toast({
+    //                 title: "Something Went Wrong",
+    //                 status: "error",
+    //                 duration: 3000,
+    //                 isClosable: true,
+    //             });
+    //             setRequestState("error");
+    //         });
+    // };
     return (
         <Box minH="15vh" minW="85vh" p={3}>
 
@@ -11,7 +32,9 @@ const Story = (story) => {
                             {story.title}
                         </Heading>
                         <Box align="center" >
-                            {story.postedAt}
+                            {new Date(story.postedAt).getUTCDay()}-
+                            {new Date(story.postedAt).getUTCMonth()}-
+                            {new Date(story.postedAt).getUTCFullYear()}
                         </Box>
                     </Box>
                     <Box >
