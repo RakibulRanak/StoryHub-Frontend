@@ -1,17 +1,15 @@
-
-
-import AllStory from "../components/story/allStory";
+import StoryView from "../components/story/storyView";
 import Layout from "../components/generic/layout";
 import { StoryProvider } from "../context/storyContext";
 
-const Stories = () => {
+const Story = () => {
     return (
         <StoryProvider>
             <Layout>
-                <AllStory />
+                <StoryView />
             </Layout>
         </StoryProvider>
     );
 };
 
-export default Stories;
+export default Story;
