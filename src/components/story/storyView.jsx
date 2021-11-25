@@ -1,16 +1,26 @@
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Button, Center, Flex, Heading, Icon, Spinner, Stack, Text } from "@chakra-ui/react";
+import {
+    Avatar,
+    Box,
+    Button,
+    Center,
+    Flex,
+    Heading,
+    Icon,
+    Spinner,
+    Stack,
+    Text
+} from '@chakra-ui/react';
 import 'moment-timezone';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from 'react';
 import Moment from 'react-moment';
-import { Redirect, useParams } from "react-router-dom";
-import { StoryContext } from "../../context/storyContext";
-import Alert from "../generic/alert";
-import { AuthContext } from './../../context/authContext';
-import StoryModal from "./storyModal";
+import { Redirect, useParams } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
+import { StoryContext } from '../../context/storyContext';
+import Alert from '../generic/alert';
+import StoryModal from './storyModal';
 
 const StoryView = () => {
-
     const { user } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
@@ -25,49 +35,77 @@ const StoryView = () => {
         <Center w="100%" h="75vh">
             <Spinner />
         </Center>
-    ) : !singleStory ? (<Redirect to="/404" />) :
-        (< Center >
-            <Box m="12%" bg="white" p="200" minH="15vh" minW="45vh" p={3} >
-
-                <Flex border="1px" w="100%" bg="gray.100" padding="3%" direction="column" borderRadius="md">
+    ) : !singleStory ? (
+        <Redirect to="/404" />
+    ) : (
+        <Center>
+            <Box m="12%" bg="white" p="200" minH="15vh" minW="45vh" p={3}>
+                <Flex
+                    border="1px"
+                    w="100%"
+                    bg="gray.100"
+                    padding="3%"
+                    direction="column"
+                    borderRadius="md"
+                >
                     <Box pb="5">
                         <Stack direction="row">
                             <Avatar name={singleStory.author} src="https://bit.ly/broken-link" />
                             <Flex direction="column" pt="1" pb="3">
-                                <h1 ><b> {singleStory.author}</b></h1>
-                                <i><Moment fromNow fontStyle>{singleStory.postedAt}</Moment></i>
+                                <h1>
+                                    <b> {singleStory.author}</b>
+                                </h1>
+                                <i>
+                                    <Moment fromNow fontStyle>
+                                        {singleStory.postedAt}
+                                    </Moment>
+                                </i>
                             </Flex>
                         </Stack>
                         <Flex direction="row">
-                            <Heading color="blue.600">
-                                {singleStory.title}
-                            </Heading>
+                            <Heading color="blue.600">{singleStory.title}</Heading>
                             <Box pl="10">
-                                {
-                                    user && user.username === singleStory.author && (
-                                        <Flex direction="row">
-                                            <Button p="0" onClick={() => setShowModal(true)} background="none" border="none" boxShadow="none !important">
-                                                <Icon as={EditIcon} />
-                                            </Button>
-                                            {showModal &&
-                                                <StoryModal close={() => {
+                                {user && user.username === singleStory.author && (
+                                    <Flex direction="row">
+                                        <Button
+                                            p="0"
+                                            onClick={() => setShowModal(true)}
+                                            background="none"
+                                            border="none"
+                                            boxShadow="none !important"
+                                        >
+                                            <Icon as={EditIcon} />
+                                        </Button>
+                                        {showModal && (
+                                            <StoryModal
+                                                close={() => {
                                                     setShowModal(false);
-                                                    document.getElementById('root').style.filter = 'none'
-                                                }} storyId={singleStory.id}
-                                                    title={singleStory.title} story={singleStory.story} />
-                                            }
-                                            <Button p="0" boxShadow="none !important" onClick={() => setShowAlert(true)}>
-                                                <Icon as={DeleteIcon} />
-                                            </Button>
-                                            {showAlert &&
-                                                <Alert show={showAlert} close={() => {
-                                                    setShowAlert(false)
-                                                }} confirm={() => deleteStory(singleStory.id)} />
-
-                                            }
-                                        </Flex>
-                                    )
-                                }
+                                                    document.getElementById('root').style.filter =
+                                                        'none';
+                                                }}
+                                                storyId={singleStory.id}
+                                                title={singleStory.title}
+                                                story={singleStory.story}
+                                            />
+                                        )}
+                                        <Button
+                                            p="0"
+                                            boxShadow="none !important"
+                                            onClick={() => setShowAlert(true)}
+                                        >
+                                            <Icon as={DeleteIcon} />
+                                        </Button>
+                                        {showAlert && (
+                                            <Alert
+                                                show={showAlert}
+                                                close={() => {
+                                                    setShowAlert(false);
+                                                }}
+                                                confirm={() => deleteStory(singleStory.id)}
+                                            />
+                                        )}
+                                    </Flex>
+                                )}
                             </Box>
                         </Flex>
                     </Box>
@@ -78,11 +116,9 @@ const StoryView = () => {
                         </Text>
                     </Box>
                 </Flex>
-
-            </Box >
-        </Center >
-        );
-
+            </Box>
+        </Center>
+    );
 };
 
 export default StoryView;

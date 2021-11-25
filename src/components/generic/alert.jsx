@@ -1,11 +1,13 @@
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal } from 'react-bootstrap';
 
 const Alert = (props) => {
-    const handleClose = () => { props.close() };
+    const handleClose = () => {
+        props.close();
+    };
     const handleYes = () => {
         props.close();
         props.confirm();
-    }
+    };
     return (
         <>
             <Modal show={props.show} onHide={handleClose}>
@@ -24,6 +26,6 @@ const Alert = (props) => {
             </Modal>
         </>
     );
-}
+};
 
 export default Alert;
