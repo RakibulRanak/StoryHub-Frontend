@@ -17,8 +17,8 @@ const StoryList = (story) => {
     const { deleteStory } = useContext(StoryContext);
 
     return (
-        <Box minH="15vh" minW="85vh" p={3}>
-            <Center>
+        <Box minH="15vh" minW="45vw" p={3}>
+            <Center   >
                 <Flex border="1px" w="100%" bg="gray.100" padding="25px" direction="column" borderRadius="md">
                     <Box pb="5">
                         <Stack direction="row">
@@ -30,7 +30,7 @@ const StoryList = (story) => {
                         </Stack>
                         <Flex direction="row">
                             <Heading color="blue.600">
-                                <a href={`/stories/${story.id}`}> {story.title}</a>
+                                <a href={`/stories/${story.id}`} target="_blank"> {story.title}</a>
 
                             </Heading>
                             <Box pl="10">
@@ -41,9 +41,9 @@ const StoryList = (story) => {
                                                 <Icon as={EditIcon} />
                                             </Button>
                                             {showModal &&
-                                                <StoryModal show={showModal} close={() => {
-
-                                                    setShowModal(false)
+                                                <StoryModal close={() => {
+                                                    setShowModal(false);
+                                                    document.getElementById('root').style.filter = 'none'
                                                 }} storyId={story.id}
                                                     title={story.title} story={story.story} />
                                             }
@@ -64,7 +64,7 @@ const StoryList = (story) => {
 
                     <Box w="100%">
                         <ShowMoreText lines={2} more={<span > <b>See more</b></span>} less={<span > <b>See less</b></span>}>
-                            <Text as="p" fontSize="lg">
+                            <Text as="p" fontSize="lg" noOfLines={6}>
                                 {story.story}
                             </Text>
                         </ShowMoreText>

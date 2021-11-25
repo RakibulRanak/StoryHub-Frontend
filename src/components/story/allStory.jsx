@@ -29,15 +29,22 @@ const AllStory = (props) => {
         </Center>
     ) : (
 
-        < Layout >
-            <Center pb="10">
+        < >
+            <Center pb="10" ml="13%" mr="13%">
                 <Flex pt={10} direction="column">
                     {
 
                         loggedIn && <> <Box rounded="md" bg="white" onClick={() => setShowModal(true)} align="center" p={3}>
-                            Want to post a story ?
-                        </Box><StoryModal show={showModal} close={() => setShowModal(false)} /></>
+                            <i>Want to post a story ?</i>
+                        </Box>
+                        </>
+
                     }
+                    {showModal && <StoryModal close={() => {
+                        setShowModal(false);
+                        document.getElementById('root').style.filter = 'none'
+                    }}
+                    />}
                     <Text align="center" mb="8px"><Heading margin="3">Stories</Heading></Text>
                     <Box bg="white" p={2} mt="10" pt="5" borderRadius="md" shadow="xl">
                         {currentStories.map((story) => (
@@ -52,7 +59,7 @@ const AllStory = (props) => {
                     currentPage={currentPage}
                     paginate={paginate} />
             </Center>
-        </Layout >
+        </>
     );
 
 };

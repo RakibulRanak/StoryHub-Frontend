@@ -29,9 +29,9 @@ const StoryView = () => {
         </Center>
     ) : !singleStory ? (<Redirect to="/404" />) :
         (< Center >
-            <Box m="10%" bg="white" p="200" minH="15vh" minW="85vh" p={3} >
+            <Box m="12%" bg="white" p="200" minH="15vh" minW="45vh" p={3} >
 
-                <Flex border="1px" w="100%" bg="gray.100" padding="25px" direction="column" borderRadius="md">
+                <Flex border="1px" w="100%" bg="gray.100" padding="3%" direction="column" borderRadius="md">
                     <Box pb="5">
                         <Stack direction="row">
                             <Avatar name={singleStory.author} src="https://bit.ly/broken-link" />
@@ -52,8 +52,9 @@ const StoryView = () => {
                                                 <Icon as={EditIcon} />
                                             </Button>
                                             {showModal &&
-                                                <StoryModal show={showModal} close={() => {
-                                                    setShowModal(false)
+                                                <StoryModal close={() => {
+                                                    setShowModal(false);
+                                                    document.getElementById('root').style.filter = 'none'
                                                 }} storyId={singleStory.id}
                                                     title={singleStory.title} story={singleStory.story} />
                                             }

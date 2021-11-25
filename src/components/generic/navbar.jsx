@@ -29,15 +29,15 @@ const MyNavbar = (props) => {
       color="white"
       {...props}
     >
-      <Flex align="center" mr={5}>
+      <Flex align="center" mr={4}>
         <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
-          <MenuItems to="/" >Story Hub</MenuItems>
+          <MenuItems to="/" >StoryHub</MenuItems>
         </Heading>
       </Flex>
 
       {user &&
         (
-          <Button boxShadow="none !important" colorScheme="white" ml="auto" mr="5">
+          <Button boxShadow="none !important" colorScheme="white" ml="auto" mr="4">
             {
               user.username
             }

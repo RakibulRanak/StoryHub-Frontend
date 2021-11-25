@@ -15,28 +15,45 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { Redirect, useHistory } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form'
+
+let signUpSchema = yup.object().shape({
+  username: yup.string()
+    .required("Username is required!")
+    .min(5, 'username must be min 5 chars.')
+    .matches(/^\S+$/, "Username can't contain white space"),
+  password: yup.string()
+    .required('Password is required!')
+    .min(8, 'Password should be min 8 chars.'),
+  confirmPassword: yup.string()
+    .required('Password confirmation is required!')
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+  name: yup.string()
+    .trim()
+    .required('Name is required!'),
+  email: yup.string().email('Must be a valid email').max(255).required('Email is required!'),
+});
 
 const SignUp = (props) => {
   const history = useHistory();
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState();
   const { loggedIn, login } = useContext(AuthContext);
-  const [username, setUsername] = useState();
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
   const [requestState, setRequestState] = useState("not-requested");
   const [message, setMessage] = useState(null)
-
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    resolver: yupResolver(signUpSchema),
+    mode: "onChange"
+  });
   const toast = useToast();
-
   const handleClick = () => setShow(!show)
-  const signUp = (e) => {
+  const signUp = (data, e) => {
     e.preventDefault();
+    const { email, username, name, password, confirmPassword } = data;
     setRequestState("loading");
-
     axios
-      .post("http://localhost:8000/api/v1/users", { email, username, name, password, confirmPassword })
+      .post("/api/v1/users", { email, username, name, password, confirmPassword })
       .then((res) => {
         setRequestState("loaded");
         toast({
@@ -46,11 +63,13 @@ const SignUp = (props) => {
           isClosable: true,
         });
         history.push("/signin");
-
       })
       .catch((err) => {
         setRequestState("error");
-        setMessage(err.response.data.message)
+        if (err.response.status == 500)
+          setMessage("Something went wrong!")
+        else
+          setMessage(err.response.data.message)
       });
   };
 
@@ -64,46 +83,49 @@ const SignUp = (props) => {
             textAlign="center"
             bg="white"
             borderRadius={5}
-            p={4}
+            p={10}
           >
-            <Heading size="md" m={1}>
+            <Heading size="md" m={3}>
               Create Your Account
             </Heading>
-            <form onSubmit={signUp}>
+            <form onSubmit={handleSubmit(signUp)} noValidate>
               <Input
                 placeholder="Email"
                 type="email"
                 m={1}
                 name="email"
-                onChange={(e) => setEmail(e.target.value)}
                 required
                 autoFocus
+                {...register("email")}
               />
+              <p><Text color="red">{errors.email?.message}</Text></p>
               <InputGroup m={1}>
                 <Input
                   type="text"
                   placeholder="Name"
                   name="name"
-                  onChange={(e) => setName(e.target.value)}
                   required
+                  {...register("name")}
                 />
               </InputGroup>
+              <p><Text color="red">{errors.name?.message}</Text></p>
               <InputGroup m={1}>
                 <Input
                   type="text"
                   placeholder="Username"
                   name="username"
-                  onChange={(e) => setUsername(e.target.value)}
                   required
+                  {...register("username")}
                 />
               </InputGroup>
+              <p><Text color="red">{errors.username?.message}</Text></p>
               <InputGroup m={1}>
                 <Input
                   type={show ? "text" : "password"}
                   placeholder="Password"
                   name="password"
-                  onChange={(e) => setPassword(e.target.value)}
                   required
+                  {...register("password")}
                 />
                 <InputRightElement width="4.5rem">
                   <Button boxShadow="none !important" h="1.75rem" size="sm" onClick={handleClick}>
@@ -111,19 +133,21 @@ const SignUp = (props) => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              <p><Text color="red">{errors.password?.message}</Text></p>
               <InputGroup m={1}>
                 <Input
                   type={show ? "text" : "password"}
                   placeholder="Confirm Password"
-                  name="confirmpassword"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  name="confirmPassword"
                   required
+                  {...register("confirmPassword")}
                 />
               </InputGroup>
+              <p><Text color="red">{errors.confirmPassword?.message}</Text></p>
 
               {requestState === "error" && (
-                <Text display="block" fontSize="sm" color="tomato">
-                  Email or Username Already Exists!
+                <Text display="block" fontSize="md" color="tomato">
+                  {message}
                 </Text>
               )}
               <Button
