@@ -1,11 +1,10 @@
-import Layout from "../generic/layout";
-import { Center, Box, Heading, Text, Container, Spinner, Flex } from "@chakra-ui/react";
-import StoryList from "./storyList";
-import { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../context/authContext"
+import { Box, Center, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/authContext";
 import { StoryContext } from "../../context/storyContext";
-import StoryModal from "./storyModal";
 import Pagination from "../pagination/pagination";
+import StoryList from "./storyList";
+import StoryModal from "./storyModal";
 
 const AllStory = (props) => {
     const { loggedIn } = useContext(AuthContext);

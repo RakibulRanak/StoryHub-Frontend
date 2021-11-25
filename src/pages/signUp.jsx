@@ -1,23 +1,17 @@
-import Layout from "../components/generic/layout";
 import {
   Box,
   Button,
-  Center,
-  Input,
-  InputGroup,
-  Heading,
-  Text,
-  Spinner,
-  useToast,
-  InputRightElement
+  Center, Heading, Input,
+  InputGroup, InputRightElement, Spinner, Text, useToast
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
-import axios from "axios";
-import { Redirect, useHistory } from "react-router-dom";
-import { AuthContext } from "../context/authContext";
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form'
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useForm } from 'react-hook-form';
+import { Redirect, useHistory } from "react-router-dom";
+import * as yup from 'yup';
+import Layout from "../components/generic/layout";
+import { AuthContext } from "../context/authContext";
 
 let signUpSchema = yup.object().shape({
   username: yup.string()

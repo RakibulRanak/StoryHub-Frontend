@@ -1,8 +1,8 @@
-import { Flex, Button, Input } from "@chakra-ui/react";
-import { useContext, useState, React, useEffect } from "react";
+import { Button, Input } from "@chakra-ui/react";
+import { React, useContext, useEffect, useState } from "react";
+import ReactDom from 'react-dom';
 import ResizeTextarea from "react-textarea-autosize";
 import { StoryContext } from "../../context/storyContext";
-import ReactDom from 'react-dom'
 
 
 const my_modal = {

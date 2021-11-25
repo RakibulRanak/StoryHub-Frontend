@@ -1,15 +1,13 @@
-import { Center, Box, Heading, Flex, Button, Text, Avatar, Stack, Icon, Spinner } from "@chakra-ui/react";
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
-import { useContext, useState, useEffect } from "react";
-import { AuthContext } from './../../context/authContext'
-import StoryModal from "./storyModal";
-import Moment from 'react-moment';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import { Avatar, Box, Button, Center, Flex, Heading, Icon, Spinner, Stack, Text } from "@chakra-ui/react";
 import 'moment-timezone';
+import { useContext, useEffect, useState } from "react";
+import Moment from 'react-moment';
+import { Redirect, useParams } from "react-router-dom";
 import { StoryContext } from "../../context/storyContext";
 import Alert from "../generic/alert";
-import { useParams } from "react-router-dom";
-import NotFound from "../../pages/404";
-import { Redirect } from "react-router-dom";
+import { AuthContext } from './../../context/authContext';
+import StoryModal from "./storyModal";
 
 const StoryView = () => {
 

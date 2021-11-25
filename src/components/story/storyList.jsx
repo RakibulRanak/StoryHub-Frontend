@@ -1,13 +1,13 @@
-import { Center, Box, Heading, Flex, Button, Text, Avatar, Stack, Icon } from "@chakra-ui/react";
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
-import { useContext, useState } from "react";
-import { AuthContext } from '../../context/authContext'
-import StoryModal from "./storyModal";
-import ShowMoreText from "react-show-more-text";
-import Moment from 'react-moment';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import { Avatar, Box, Button, Center, Flex, Heading, Icon, Stack, Text } from "@chakra-ui/react";
 import 'moment-timezone';
+import { useContext, useState } from "react";
+import Moment from 'react-moment';
+import ShowMoreText from "react-show-more-text";
+import { AuthContext } from '../../context/authContext';
 import { StoryContext } from "../../context/storyContext";
 import Alert from "../generic/alert";
+import StoryModal from "./storyModal";
 
 
 const StoryList = (story) => {

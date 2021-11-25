@@ -1,14 +1,12 @@
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+  BrowserRouter as Router, Route, Switch
 } from "react-router-dom";
 import MyNavbar from "./components/generic/navbar";
-import Stories from "./pages/stories"
-import Story from "./pages/story"
-import SignUp from "./pages/signUp"
-import SignIn from "./pages/signIn";
 import NotFound from "./pages/404";
+import SignIn from "./pages/signIn";
+import SignUp from "./pages/signUp";
+import Stories from "./pages/stories";
+import Story from "./pages/story";
 
 
 

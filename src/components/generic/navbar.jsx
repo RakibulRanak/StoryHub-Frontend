@@ -1,7 +1,7 @@
 import { Button, Flex, Heading, Link } from "@chakra-ui/react";
+import { useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
-import { useContext } from "react";
 
 const MyNavbar = (props) => {
   const { loggedIn, logoutHandler, user } = useContext(AuthContext);
@@ -41,8 +41,6 @@ const MyNavbar = (props) => {
             {
               user.username
             }
-            {/* <a href="mailto:someone@yoursite.com">Email Us</a> */}
-
           </Button>
         )
       }
