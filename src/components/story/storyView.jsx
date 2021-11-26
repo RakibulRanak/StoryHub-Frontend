@@ -39,83 +39,99 @@ const StoryView = () => {
         <Redirect to="/404" />
     ) : (
         <Center>
-            <Box m="12%" bg="white" p="200" minH="15vh" minW="45vh" p={3}>
-                <Flex
-                    border="1px"
-                    w="100%"
-                    bg="gray.100"
-                    padding="3%"
-                    direction="column"
-                    borderRadius="md"
-                >
-                    <Box pb="5">
-                        <Stack direction="row">
-                            <Avatar name={singleStory.author} src="https://bit.ly/broken-link" />
-                            <Flex direction="column" pt="1" pb="3">
-                                <h1>
-                                    <b> {singleStory.author}</b>
-                                </h1>
-                                <i>
-                                    <Moment fromNow fontStyle>
-                                        {singleStory.postedAt}
-                                    </Moment>
-                                </i>
+            <Box
+                m="12%"
+                mt="8%"
+                bg="gray.200"
+                p="200"
+                minH="15vh"
+                minW="45vh"
+                p={5}
+                borderRadius="md"
+                shadow="xl"
+            >
+                <Box>
+                    <Flex
+                        w="100%"
+                        bg="white"
+                        boxShadow="base"
+                        padding="3%"
+                        direction="column"
+                        borderRadius="md"
+                    >
+                        <Box pb="5">
+                            <Stack direction="row">
+                                <Avatar
+                                    name={singleStory.author}
+                                    src="https://bit.ly/broken-link"
+                                />
+                                <Flex direction="column" pt="1" pb="3">
+                                    <h1>
+                                        <b> {singleStory.author}</b>
+                                    </h1>
+                                    <i>
+                                        <Moment fromNow fontStyle>
+                                            {singleStory.postedAt}
+                                        </Moment>
+                                    </i>
+                                </Flex>
+                            </Stack>
+                            <Flex direction="row">
+                                <Heading color="blue.600">{singleStory.title}</Heading>
+                                <Box pl="10">
+                                    {user && user.username === singleStory.author && (
+                                        <Flex direction="row">
+                                            <Button
+                                                p="0"
+                                                onClick={() => setShowModal(true)}
+                                                background="none"
+                                                border="none"
+                                                boxShadow="none !important"
+                                            >
+                                                <Icon as={EditIcon} />
+                                            </Button>
+                                            {showModal && (
+                                                <StoryModal
+                                                    close={() => {
+                                                        setShowModal(false);
+                                                        document.getElementById(
+                                                            'root'
+                                                        ).style.filter = 'none';
+                                                    }}
+                                                    storyId={singleStory.id}
+                                                    title={singleStory.title}
+                                                    story={singleStory.story}
+                                                />
+                                            )}
+                                            <Button
+                                                p="0"
+                                                boxShadow="none !important"
+                                                onClick={() => setShowAlert(true)}
+                                            >
+                                                <Icon as={DeleteIcon} />
+                                            </Button>
+                                            {showAlert && (
+                                                <Alert
+                                                    show={showAlert}
+                                                    close={() => {
+                                                        setShowAlert(false);
+                                                    }}
+                                                    confirm={() => deleteStory(singleStory.id)}
+                                                />
+                                            )}
+                                        </Flex>
+                                    )}
+                                </Box>
                             </Flex>
-                        </Stack>
-                        <Flex direction="row">
-                            <Heading color="blue.600">{singleStory.title}</Heading>
-                            <Box pl="10">
-                                {user && user.username === singleStory.author && (
-                                    <Flex direction="row">
-                                        <Button
-                                            p="0"
-                                            onClick={() => setShowModal(true)}
-                                            background="none"
-                                            border="none"
-                                            boxShadow="none !important"
-                                        >
-                                            <Icon as={EditIcon} />
-                                        </Button>
-                                        {showModal && (
-                                            <StoryModal
-                                                close={() => {
-                                                    setShowModal(false);
-                                                    document.getElementById('root').style.filter =
-                                                        'none';
-                                                }}
-                                                storyId={singleStory.id}
-                                                title={singleStory.title}
-                                                story={singleStory.story}
-                                            />
-                                        )}
-                                        <Button
-                                            p="0"
-                                            boxShadow="none !important"
-                                            onClick={() => setShowAlert(true)}
-                                        >
-                                            <Icon as={DeleteIcon} />
-                                        </Button>
-                                        {showAlert && (
-                                            <Alert
-                                                show={showAlert}
-                                                close={() => {
-                                                    setShowAlert(false);
-                                                }}
-                                                confirm={() => deleteStory(singleStory.id)}
-                                            />
-                                        )}
-                                    </Flex>
-                                )}
-                            </Box>
-                        </Flex>
-                    </Box>
+                        </Box>
 
-                    <Box w="100%">
-                        <Text as="p" fontSize="lg">
-                            {singleStory.story}
-                        </Text>
-                    </Box>
-                </Flex>
+                        <Box w="100%">
+                            <Text whiteSpace="pre-line" as="p" fontSize="lg">
+                                {singleStory.story}
+                            </Text>
+                        </Box>
+                    </Flex>
+                </Box>
             </Box>
         </Center>
     );

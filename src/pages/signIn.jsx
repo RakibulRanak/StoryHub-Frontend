@@ -80,7 +80,7 @@ const SignIn = (props) => {
     return (
         <Layout>
             <Center h={['75vh', '85vh']}>
-                <Box boxShadow="xl" textAlign="center" bg="white" borderRadius={5} p={10}>
+                <Box boxShadow="dark-lg" textAlign="center" bg="white" borderRadius={5} p={10}>
                     <Heading size="md" m={1}>
                         Log In
                     </Heading>

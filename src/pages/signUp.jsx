@@ -1,14 +1,14 @@
 import {
-  Box,
-  Button,
-  Center,
-  Heading,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Spinner,
-  Text,
-  useToast
+    Box,
+    Button,
+    Center,
+    Heading,
+    Input,
+    InputGroup,
+    InputRightElement,
+    Spinner,
+    Text,
+    useToast
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
@@ -81,7 +81,7 @@ const SignUp = (props) => {
     return (
         <Layout>
             <Center h={['75vh', '85vh']}>
-                <Box boxShadow="xl" textAlign="center" bg="white" borderRadius={5} p={10}>
+                <Box boxShadow="dark-lg" textAlign="center" bg="white" borderRadius={5} p={10}>
                     <Heading size="md" m={3}>
                         Create Your Account
                     </Heading>

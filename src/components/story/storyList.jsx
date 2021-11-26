@@ -19,10 +19,10 @@ const StoryList = (story) => {
         <Box minH="15vh" minW="45vw" p={3}>
             <Center>
                 <Flex
-                    border="1px"
                     w="100%"
-                    bg="gray.100"
+                    bg="white"
                     padding="25px"
+                    boxShadow="base"
                     direction="column"
                     borderRadius="md"
                 >
@@ -109,7 +109,7 @@ const StoryList = (story) => {
                                 </span>
                             }
                         >
-                            <Text as="p" fontSize="lg" noOfLines={6}>
+                            <Text whiteSpace="pre-line" as="p" fontSize="lg" noOfLines={6}>
                                 {story.story}
                             </Text>
                         </ShowMoreText>

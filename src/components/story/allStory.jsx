@@ -35,7 +35,8 @@ const AllStory = (props) => {
                             {' '}
                             <Box
                                 rounded="md"
-                                bg="white"
+                                boxShadow="md"
+                                bg="gray.100"
                                 onClick={() => setShowModal(true)}
                                 align="center"
                                 p={3}
@@ -55,7 +56,7 @@ const AllStory = (props) => {
                     <Text align="center" mb="8px">
                         <Heading margin="3">Stories</Heading>
                     </Text>
-                    <Box bg="white" p={2} mt="10" pt="5" borderRadius="md" shadow="xl">
+                    <Box bg="gray.200" p={2} mt="10" pt="3" borderRadius="md" shadow="xl">
                         {currentStories.map((story) => (
                             <StoryList {...story} key={story.id} />
                         ))}
