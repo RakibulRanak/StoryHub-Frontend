@@ -1,19 +1,23 @@
-import { Modal, Button } from "react-bootstrap";
+import { useColorModeValue } from '@chakra-ui/react';
+import { Button, Modal } from 'react-bootstrap';
 
 const Alert = (props) => {
-    const handleClose = () => { props.close() };
+    const color = useColorModeValue('bg-white', 'bg-dark');
+    const handleClose = () => {
+        props.close();
+    };
     const handleYes = () => {
         props.close();
         props.confirm();
-    }
+    };
     return (
         <>
             <Modal show={props.show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className={color}>
                     <Modal.Title>Confirmation</Modal.Title>
                 </Modal.Header>
-                <Modal.Body> Are you sure to perform this action?</Modal.Body>
-                <Modal.Footer>
+                <Modal.Body className={color}> Are you sure to perform this action?</Modal.Body>
+                <Modal.Footer className={color}>
                     <Button variant="primary" onClick={handleClose}>
                         Close
                     </Button>
@@ -24,6 +28,6 @@ const Alert = (props) => {
             </Modal>
         </>
     );
-}
+};
 
 export default Alert;
