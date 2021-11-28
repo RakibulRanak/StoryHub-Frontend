@@ -9,6 +9,7 @@ import {
     Link,
     Spinner,
     Text,
+    useColorModeValue,
     useToast
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -35,6 +36,7 @@ const signInSchema = yup.object().shape({
 
 const SignIn = (props) => {
     const [show, setShow] = useState(false);
+    const color = useColorModeValue('gray.100', 'gray.600');
     const {
         register,
         handleSubmit,
@@ -67,10 +69,7 @@ const SignIn = (props) => {
                 });
             })
             .catch((err) => {
-                // console.log(err.response.status)
                 setRequestState('error');
-                // if (err.toJSON().message === 'Network Error')
-                //     setMessage("Something went wrong!")
                 if (err.response.status == 500) setMessage('Something went wrong!');
                 else setMessage(err.response.data.message);
             });
@@ -80,7 +79,7 @@ const SignIn = (props) => {
     return (
         <Layout>
             <Center h={['75vh', '85vh']}>
-                <Box boxShadow="dark-lg" textAlign="center" bg="white" borderRadius={5} p={10}>
+                <Box boxShadow="dark-lg" textAlign="center" bg={color} borderRadius={5} p={10}>
                     <Heading size="md" m={1}>
                         Log In
                     </Heading>
@@ -108,6 +107,7 @@ const SignIn = (props) => {
                             />
                             <InputRightElement width="4.5rem">
                                 <Button
+                                    color="black"
                                     boxShadow="none !important"
                                     h="1.75rem"
                                     size="sm"

@@ -1,4 +1,4 @@
-import { Button, Input } from '@chakra-ui/react';
+import { Box, Button, Input, useColorModeValue } from '@chakra-ui/react';
 import { React, useContext, useEffect, useState } from 'react';
 import ReactDom from 'react-dom';
 import ResizeTextarea from 'react-textarea-autosize';
@@ -8,16 +8,14 @@ const my_modal = {
     position: 'fixed',
     top: '50%',
     left: '50%',
-    width: '47vw',
+    width: '50vw',
     minWidth: '300px',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: '#FFF',
-    padding: '30px',
-    paddingBottom: '20px',
+    padding: '12px',
+    paddingBottom: '8px',
     zIndex: 1000,
     align: 'center',
-    backgroundColor: 'rgba(0, 0, 0, .7)',
-    backdropFilter: 'blur(8px)',
+    backdropFilter: 'blur(3px)',
 };
 
 const StoryModal = (props) => {
@@ -25,6 +23,8 @@ const StoryModal = (props) => {
     const [title, setTitle] = useState(props.title);
     const [story, setStory] = useState(props.story);
     const [disable, setDisable] = useState(true);
+    const color = useColorModeValue('gray.100', 'gray.600');
+    const opColor = useColorModeValue('gray.500', 'gray.300');
     document.getElementById('root').style.filter = 'blur(3px)';
 
     useEffect(() => {
@@ -47,14 +47,14 @@ const StoryModal = (props) => {
     };
 
     return ReactDom.createPortal(
-        <div style={my_modal}>
-            <form onSubmit={props.storyId ? handleUpdateSubmit : handlePostSubmit} pt={10}>
+        <Box style={my_modal} bg={opColor} boxShadow="dark-lg">
+            <form onSubmit={props.storyId ? handleUpdateSubmit : handlePostSubmit} pt={5}>
                 <Input
                     name="title"
                     value={title}
                     required
                     onChange={(e) => setTitle(e.target.value)}
-                    bg="white"
+                    bg={color}
                     placeholder="Title"
                 />
                 <Input
@@ -63,21 +63,21 @@ const StoryModal = (props) => {
                     required
                     name="story"
                     onChange={(e) => setStory(e.target.value)}
-                    bg="white"
+                    bg={color}
                     minH="20vh"
                     maxH="70vh"
                     as={ResizeTextarea}
                     colorScheme="white"
                     placeholder="Story"
                 />
-                <Button type="submit" disabled={disable} colorScheme="teal" size="sm">
+                <Button type="submit" disabled={disable} colorScheme="green" size="sm">
                     {props.storyId ? 'UPDATE' : 'POST'}
                 </Button>
-                <Button size="sm" onClick={props.close}>
+                <Button size="sm" onClick={props.close} boxShadow="md" bg={color}>
                     Cancel
                 </Button>
             </form>
-        </div>,
+        </Box>,
         document.getElementById('portal')
     );
 };

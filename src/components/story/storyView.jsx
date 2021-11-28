@@ -9,7 +9,8 @@ import {
     Icon,
     Spinner,
     Stack,
-    Text
+    Text,
+    useColorModeValue
 } from '@chakra-ui/react';
 import 'moment-timezone';
 import { useContext, useEffect, useState } from 'react';
@@ -22,6 +23,7 @@ import StoryModal from './storyModal';
 
 const StoryView = () => {
     const { user } = useContext(AuthContext);
+    const color = useColorModeValue('white', 'gray.800');
     const [showModal, setShowModal] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const { deleteStory, singleStory, getSingleStory, storyLoading } = useContext(StoryContext);
@@ -45,17 +47,18 @@ const StoryView = () => {
                 bg="gray.200"
                 p="200"
                 minH="15vh"
-                minW="45vh"
-                p={5}
+                w="55vw"
+                minWidth="350px"
+                p={1}
                 borderRadius="md"
                 shadow="xl"
             >
                 <Box>
                     <Flex
                         w="100%"
-                        bg="white"
+                        bg={color}
                         boxShadow="base"
-                        padding="3%"
+                        p={6}
                         direction="column"
                         borderRadius="md"
                     >

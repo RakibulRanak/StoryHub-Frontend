@@ -1,5 +1,16 @@
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Button, Center, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react';
+import {
+    Avatar,
+    Box,
+    Button,
+    Center,
+    Flex,
+    Heading,
+    Icon,
+    Stack,
+    Text,
+    useColorModeValue
+} from '@chakra-ui/react';
 import 'moment-timezone';
 import { useContext, useState } from 'react';
 import Moment from 'react-moment';
@@ -14,13 +25,14 @@ const StoryList = (story) => {
     const [showModal, setShowModal] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const { deleteStory } = useContext(StoryContext);
+    const color = useColorModeValue('white', 'gray.800');
 
     return (
-        <Box minH="15vh" minW="45vw" p={3}>
+        <Box minH="15vh" w="55vw" minWidth="350px" pb={0.5} pt={1} pl={1} pr={1}>
             <Center>
                 <Flex
                     w="100%"
-                    bg="white"
+                    bg={color}
                     padding="25px"
                     boxShadow="base"
                     direction="column"
@@ -29,7 +41,7 @@ const StoryList = (story) => {
                     <Box pb="5">
                         <Stack direction="row">
                             <Avatar name={story.author} src="https://bit.ly/broken-link" />
-                            <Flex direction="column" pt="1" pb="3">
+                            <Flex direction="column" pt="1" pb="1">
                                 <h1>
                                     <b> {story.author}</b>
                                 </h1>
@@ -74,6 +86,8 @@ const StoryList = (story) => {
                                         <Button
                                             p="0"
                                             boxShadow="none !important"
+                                            background="none"
+                                            border="none"
                                             onClick={() => setShowAlert(true)}
                                         >
                                             <Icon as={DeleteIcon} />
@@ -95,7 +109,7 @@ const StoryList = (story) => {
 
                     <Box w="100%">
                         <ShowMoreText
-                            lines={2}
+                            lines={3}
                             more={
                                 <span>
                                     {' '}
@@ -109,7 +123,7 @@ const StoryList = (story) => {
                                 </span>
                             }
                         >
-                            <Text whiteSpace="pre-line" as="p" fontSize="lg" noOfLines={6}>
+                            <Text whiteSpace="pre-line" as="p" fontSize="md" noOfLines={6}>
                                 {story.story}
                             </Text>
                         </ShowMoreText>

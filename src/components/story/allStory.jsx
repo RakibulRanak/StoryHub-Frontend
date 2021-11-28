@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Heading, Spinner, Text } from '@chakra-ui/react';
+import { Box, Center, Flex, Spinner, useColorModeValue } from '@chakra-ui/react';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/authContext';
 import { StoryContext } from '../../context/storyContext';
@@ -12,6 +12,7 @@ const AllStory = (props) => {
     const [storiesPerPage] = useState(6);
     const [currentPage, setCurrentPage] = useState(1);
     const [showModal, setShowModal] = useState(false);
+    const color = useColorModeValue('gray.200', 'gray.700');
 
     useEffect(() => {
         getStories();
@@ -36,7 +37,7 @@ const AllStory = (props) => {
                             <Box
                                 rounded="md"
                                 boxShadow="md"
-                                bg="gray.100"
+                                bg={color}
                                 onClick={() => setShowModal(true)}
                                 align="center"
                                 p={3}
@@ -53,10 +54,10 @@ const AllStory = (props) => {
                             }}
                         />
                     )}
-                    <Text align="center" mb="8px">
+                    {/* <Text align="center" mb="8px">
                         <Heading margin="3">Stories</Heading>
-                    </Text>
-                    <Box bg="gray.200" p={2} mt="10" pt="3" borderRadius="md" shadow="xl">
+                    </Text> */}
+                    <Box bg="gray.200" pl={0} mt="100" pt={0} pb={0} borderRadius="md" shadow="xl">
                         {currentStories.map((story) => (
                             <StoryList {...story} key={story.id} />
                         ))}

@@ -8,6 +8,7 @@ import {
     InputRightElement,
     Spinner,
     Text,
+    useColorModeValue,
     useToast
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -38,6 +39,7 @@ const signUpSchema = yup.object().shape({
 });
 
 const SignUp = (props) => {
+    const color = useColorModeValue('gray.100', 'gray.600');
     const history = useHistory();
     const [show, setShow] = useState(false);
     const { loggedIn, login } = useContext(AuthContext);
@@ -81,7 +83,7 @@ const SignUp = (props) => {
     return (
         <Layout>
             <Center h={['75vh', '85vh']}>
-                <Box boxShadow="dark-lg" textAlign="center" bg="white" borderRadius={5} p={10}>
+                <Box boxShadow="dark-lg" textAlign="center" bg={color} borderRadius={5} p={10}>
                     <Heading size="md" m={3}>
                         Create Your Account
                     </Heading>
