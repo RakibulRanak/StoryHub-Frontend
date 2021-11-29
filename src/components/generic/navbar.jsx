@@ -21,6 +21,7 @@ const MyNavbar = (props) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const navColor = useColorModeValue('gray.800', 'gray.500');
     const color = useColorModeValue('white', 'gray.800');
+    const menuColor = useColorModeValue('gray.500', 'gray.800');
     console.log(color);
     const handleChange = () => {
         setChecked(!checked);
@@ -87,6 +88,8 @@ const MyNavbar = (props) => {
                         m={2}
                         p={5}
                         icon={<HamburgerIcon />}
+                        color={menuColor}
+                        bgColor={navColor}
                         onClick={() => changeDisplay('flex')}
                         display={['flex', 'flex', 'none', 'none']}
                         zIndex={3}
@@ -110,6 +113,7 @@ const MyNavbar = (props) => {
                         mt={2}
                         mr={2}
                         aria-label="Open Menu"
+                        bgColor={navColor}
                         size="lg"
                         icon={<CloseIcon />}
                         onClick={() => changeDisplay('none')}
