@@ -96,6 +96,17 @@ const MyNavbar = (props) => {
                     />
                 )}
             </Flex>
+            <Flex bgColor={navColor}>
+                {display === 'none' && user && (
+                    <Flex align="center">
+                        <Button boxShadow="none !important" colorScheme="white">
+                            <Text fontSize="17px" color="white">
+                                {user.username}
+                            </Text>
+                        </Button>
+                    </Flex>
+                )}
+            </Flex>
             <Flex
                 w="100vw"
                 display={display}
@@ -121,15 +132,6 @@ const MyNavbar = (props) => {
                 </Flex>
 
                 <Flex direction="column" align="center" width="100vw" pb="4">
-                    {user && (
-                        <Flex align="center">
-                            <Button boxShadow="none !important" colorScheme="white">
-                                <Text fontSize="17px" color="white">
-                                    {user.username}
-                                </Text>
-                            </Button>
-                        </Flex>
-                    )}
                     {!loggedIn && (
                         <Flex>
                             <Button
