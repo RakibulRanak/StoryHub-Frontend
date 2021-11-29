@@ -57,7 +57,7 @@ const AllStory = (props) => {
                     {/* <Text align="center" mb="8px">
                         <Heading margin="3">Stories</Heading>
                     </Text> */}
-                    <Box bg="gray.200" pl={0} mt="100" pt={0} pb={0} borderRadius="md" shadow="xl">
+                    <Box bg="gray.200" pl={0} mt="10vh" pt={0} pb={0} borderRadius="md" shadow="xl">
                         {currentStories.map((story) => (
                             <StoryList {...story} key={story.id} />
                         ))}

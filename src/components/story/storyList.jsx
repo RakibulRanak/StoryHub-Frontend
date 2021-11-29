@@ -54,7 +54,7 @@ const StoryList = (story) => {
                         </Stack>
                         <Flex direction="row">
                             <Heading color="blue.600">
-                                <a href={`/stories/${story.id}`} target="_blank" rel="noreferrer">
+                                <a href={`/stories/${story.id}`}  rel="noreferrer">
                                     {' '}
                                     {story.title}
                                 </a>

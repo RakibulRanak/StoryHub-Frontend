@@ -37,6 +37,7 @@ const MyNavbar = (props) => {
             display="block"
             to={props.to}
             style={{ color: '#FFF', textDecoration: 'none' }}
+            boxShadow="none !important"
         >
             {props.children}
         </Link>
@@ -62,7 +63,9 @@ const MyNavbar = (props) => {
                             <MenuItems to="/">StoryHub</MenuItems>
                         </Heading>
                     </Flex>
-                    <Switch ml="2px" pl="1px" onChange={handleChange} isChecked={checked} />
+                  
+                    <Switch flex="1" ml="2px" pl="1px" onChange={handleChange} isChecked={checked} />
+                   
                     {user && (
                         <Button boxShadow="none !important" colorScheme="white" ml="auto" mr="0">
                             <Text fontSize="17px" color="white">
@@ -92,9 +95,15 @@ const MyNavbar = (props) => {
                         bgColor={navColor}
                         onClick={() => changeDisplay('flex')}
                         display={['flex', 'flex', 'none', 'none']}
-                        zIndex={3}
+                        zIndex={2}
                     />
                 )}
+                {display === 'none' && 
+                  <Flex align="center" mb={4} display={['flex', 'flex', 'none', 'none']}>
+                        <Heading as="h1" size="lg" letterSpacing="-.1rem">
+                            <MenuItems to="/">StoryHub</MenuItems>
+                        </Heading>
+                    </Flex>}
             </Flex>
             <Flex bgColor={navColor}>
                 {display === 'none' && user && (
@@ -135,6 +144,7 @@ const MyNavbar = (props) => {
                     {!loggedIn && (
                         <Flex>
                             <Button
+                              onClick={() => changeDisplay('none')}
                                 mb={3}
                                 as={RouterLink}
                                 to="/signin"
@@ -147,13 +157,15 @@ const MyNavbar = (props) => {
                     )}
                     {loggedIn && (
                         <Flex>
-                            <Button mb={3} onClick={logoutHandler} bg={navColor} border="1px">
+                            <Button mb={3} onClick={()=>{changeDisplay('none');logoutHandler()}} bg={navColor} border="1px">
                                 Log Out
                             </Button>
                         </Flex>
                     )}
                     <Flex>
-                        <Switch onChange={handleChange} isChecked={checked} />
+                        {/* <Button > */}
+                        <Switch  onChange={()=>{changeDisplay('none');handleChange()}} isChecked={checked} />
+                        {/* </Button> */}
                     </Flex>
                 </Flex>
             </Flex>

@@ -81,9 +81,9 @@ const SignUp = (props) => {
 
     if (loggedIn) return <Redirect to="/" />;
     return (
-        <Layout>
+        <Layout >
             <Center h={['75vh', '85vh']}>
-                <Box boxShadow="dark-lg" textAlign="center" bg={color} borderRadius={5} p={10}>
+                <Box   zIndex={30}boxShadow="dark-lg" textAlign="center" bg={color} borderRadius={5} p={10}>
                     <Heading size="md" m={3}>
                         Create Your Account
                     </Heading>
