@@ -25,5 +25,5 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  "eslint.enable": true
+  "eslint.enable": false
 }
