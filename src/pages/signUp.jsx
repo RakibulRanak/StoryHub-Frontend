@@ -61,7 +61,7 @@ const SignUp = (props) => {
         const { email, username, name, password, confirmPassword } = data;
         setRequestState('loading');
         axios
-            .post('/api/v1/users', { email, username, name, password, confirmPassword })
+            .post(`/api/v1/users`, { email, username, name, password, confirmPassword })
             .then((res) => {
                 setRequestState('loaded');
                 toast({

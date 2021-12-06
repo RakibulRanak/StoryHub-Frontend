@@ -26,7 +26,7 @@ const AuthProvider = (props) => {
 
     const logoutHandler = (e) => {
         logout();
-        axios.post('/api/v1/users/logout').finally(() => <Redirect to="/" />);
+        axios.post(`/api/v1/users/logout`).finally(() => <Redirect to="/" />);
     };
     const unAuthorizeHandler = (errCode) => {
         if (errCode === 401) {

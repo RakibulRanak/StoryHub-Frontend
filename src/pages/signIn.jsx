@@ -50,6 +50,7 @@ const SignIn = (props) => {
     const [message, setMessage] = useState(null);
     const toast = useToast();
     const { loggedIn, login } = useContext(AuthContext);
+    const URL = process.env.REACT_APP_URL;
     const handleClick = () => setShow(!show);
 
     const signIn = (data, e) => {
@@ -57,7 +58,7 @@ const SignIn = (props) => {
         setRequestState('loading');
         const { username, password } = data;
         axios
-            .post('/api/v1/users/login', { username, password })
+            .post(`/api/v1/users/login`, { username, password })
             .then((res) => {
                 setRequestState('loaded');
                 login(res.data.data);

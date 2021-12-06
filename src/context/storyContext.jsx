@@ -17,7 +17,7 @@ const StoryProvider = (props) => {
 
     const getStories = () => {
         axios
-            .get('/api/v1/stories')
+            .get(`/api/v1/stories`)
             .then((res) => {
                 setStories(res.data.data);
                 setStoriesLoading(false);
@@ -40,7 +40,7 @@ const StoryProvider = (props) => {
 
     const postStories = (story) => {
         axios
-            .post('/api/v1/stories', story)
+            .post(`/api/v1/stories`, story)
             .then((res) => {
                 getStories();
             })
