@@ -5,7 +5,7 @@ This repository serves as a frontend for my StoryHub applcation which is a fulls
 
 # Getting Started
 
-To get the Node server running locally:
+To get the React server running locally:
 
 - Clone this repo
 - `npm install` to install all required dependencies
@@ -31,4 +31,4 @@ StoryHub is mainly a simple blogging web app, where a random person can become a
     - [Dockerization](/documentation/docker.md) 
     - [Deployment](/documentation/deploy.md) 
 
-
+*[read backend documentation](https://github.com/RakibulRanak/simple-web-api-learning-with-express/blob/main/readme.md)*
