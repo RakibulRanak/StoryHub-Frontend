@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "homepage": "http://storyhubfrontend.herokuapp.com",
+  "homepage": "https://story-hub-app.onrender.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
