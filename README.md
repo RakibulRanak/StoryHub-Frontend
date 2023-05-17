@@ -12,7 +12,7 @@ To get the React server running locally:
 - Start the [backend server](https://github.com/RakibulRanak/simple-web-api-learning-with-express) and set REACT_APP_URL in .env file according to your backend server ip:port
 - `npm start` to start the local react server
 
-Alternately, you can quickly visit the web app at https://story-hub-application.herokuapp.com/
+Alternately, you can quickly visit the web app at https://story-hub.onrender.com/
 
 # Description
 StoryHub is mainly a simple blogging web app, where a random person can become an user by signing up with email, username, name and password. A user can post story with a valid title, and content. Users can also edit or delete their respective stories while logged in.
