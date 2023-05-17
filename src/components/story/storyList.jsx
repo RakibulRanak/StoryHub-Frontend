@@ -7,6 +7,7 @@ import {
     Flex,
     Heading,
     Icon,
+    Link,
     Stack,
     Text,
     useColorModeValue
@@ -14,6 +15,7 @@ import {
 import 'moment-timezone';
 import { useContext, useState } from 'react';
 import Moment from 'react-moment';
+import { Link as RouterLink } from 'react-router-dom';
 import ShowMoreText from 'react-show-more-text';
 import { AuthContext } from '../../context/authContext';
 import { StoryContext } from '../../context/storyContext';
@@ -54,10 +56,10 @@ const StoryList = (story) => {
                         </Stack>
                         <Flex direction="row">
                             <Heading color="blue.600">
-                                <a href={`/stories/${story.id}`}  rel="noreferrer">
+                                <Link as = {RouterLink} to ={`/stories/${story.id}`}  style={{ textDecoration: 'none' }}>
                                     {' '}
                                     {story.title}
-                                </a>
+                                </Link>
                             </Heading>
                             <Box pl="10">
                                 {user && user.username === story.author && (
